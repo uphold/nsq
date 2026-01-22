@@ -1,4 +1,4 @@
-FROM golang:alpine AS build
+FROM golang:1.17.3-alpine3.15 AS build
 
 RUN apk update && apk add make gcc musl-dev
 
@@ -10,7 +10,7 @@ RUN ./test.sh
 RUN CGO_ENABLED=0 make PREFIX=/opt/nsq BLDFLAGS='-ldflags="-s -w"' install
 
 
-FROM alpine:latest
+FROM alpine:3.15.0
 
 EXPOSE 4150 4151 4160 4161 4170 4171
 
